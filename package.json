@@ -10,10 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/Andela-ddiei/Inverted-Index.git"
   },
-  "author": "",
+  "author": "Delores Diei",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Andela-ddiei/Inverted-Index/issues"
   },
-  "homepage": "https://github.com/Andela-ddiei/Inverted-Index#readme"
+  "homepage": "https://github.com/Andela-ddiei/Inverted-Index#readme",
+  "devDependencies": {
+    "eslint": "^3.15.0"
+  }
 }
