@@ -22,7 +22,7 @@
 ## Why is this project useful
 
 - Inverted index ensures fast processing when working with very large record files.
-- It is the most popular data structure used in documet retrieval systems.
+- It is the most popular data structure used in document retrieval systems.
 
 ## How users can get started with the project
 N/A
