@@ -29,7 +29,7 @@
 N/A
 ```
 ## Requirements
-```
+
 - [Bootstrap](http://getbootstrap.com/): Bootstrap makes styling responsive web pages faster and easier. 
     GITHUB: https://github.com/twbs/bootstrap
 - [AngularJs](https://angularjs.org/): AngularJS is a JavaScript MVC Framework that integrates two-way data binding, web services, and build web components. 
@@ -39,7 +39,6 @@ N/A
 - [Gulp](https://gulpjs.com): Gulp is a handy toolkit for automating painful or time-consuming tasks in your development workflow.
 - [mocha](https://mochajs.org): Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser used for asynchronous testing.
 
-```
 ## How to setup the project/installation/configuration
 ```
 N/A
@@ -53,9 +52,8 @@ N/A
 - Users can only upload JSON files
 ```
 ## Contributing to the project
-```
+
 **Delores Diei**
-```
 ## Troubleshooting and FAQ
 ```
 [https://github.com/andela-ddiei/inverted-index/issues](https://github.com/andela-ddiei/inverted-index/issues)
