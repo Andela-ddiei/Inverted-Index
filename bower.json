@@ -1,0 +1,17 @@
+{
+  "name": "inverted-index",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Delores Diei"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Andela-ddiei/Inverted-Index",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
