@@ -1,6 +1,5 @@
 language: node_js
 node_js: "stable"
-script: npm test
 addons:
     code_climate:
         repo_token: 3af55c89246428166253ce9ff72bc4c779b2f73f4e1061db9f48c2ab41821db6
