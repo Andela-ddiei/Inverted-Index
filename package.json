@@ -7,8 +7,11 @@
     "test": "test/spec"
   },
   "scripts": {
+    "start": "gulp",
     "test": "mocha test/spec/test.js",
-    "lint": "node_modules/.bin/eslint src/js/ || true"
+    "lint": "node_modules/.bin/eslint src/js/ || true",
+    "cover": "istanbul cover -x test/spec/test.js node_modules/mocha/bin/_mocha test/spec/test.js",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -24,12 +27,15 @@
     "browser-sync": "^2.18.7",
     "browserify": "^14.0.0",
     "chai": "*",
+    "coveralls": "^2.11.16",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "gulp": "^3.9.1",
-    "mocha": "*"
+    "istanbul": "^0.4.5",
+    "mocha": "^1.13.0",
+    "mocha-lcov-reporter": "^1.2.0"
   }
 }

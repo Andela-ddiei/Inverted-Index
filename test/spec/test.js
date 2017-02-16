@@ -1,7 +1,13 @@
-const assert = require('assert');
+const chai = require('chai');
 
-describe('Array', () => {
-  describe('#indexOf()', () => {
-    it('should return -1 when the value is not present', () => {});
-  });
+const assert = chai.assert;
+
+const myApp = require('../../src/js/inverted-index.js');
+
+describe("Sample test", () => {
+  it("should return 2 ", () => {
+    assert(myApp.invertedIndex() === 2);
+  })
+
 });
+

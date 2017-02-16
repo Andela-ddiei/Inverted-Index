@@ -11,10 +11,13 @@ gulp.task('browser-sync', () => {
       port: 3020
     }
   });
-
-  gulp.watch('src/*.js', browserSync.reload);
-  gulp.watch('src/*.css', browserSync.reload);
-  gulp.watch('src/*.html', browserSync.reload);
 });
-gulp.task('default', ['browser-sync']);
+
+gulp.task('watch', () => {
+  gulp.watch(['src/*.html', 'src/css/*.css', 'src/js/*.js'])
+  .on('change', browserSync.reload);
+});
+
+
+gulp.task('default', ['browser-sync', 'watch']);
 
