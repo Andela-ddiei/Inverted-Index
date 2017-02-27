@@ -26,37 +26,22 @@ describe('Validate files', () => {
     expect(books[0].text).to.not.be.undefined;
   });
 });
-describe('createIndex class', () => {
-  it('should be a class', () => {
-    expect(newIndex instanceof InvertedIndex).to.be.true;
-    expect(typeof (newIndex)).to.equal('object');
-  });
-});
 
 describe('Normalized Text', () => {
-  it('should be a method in InvertedIndex', () => {
-    expect(InvertedIndex.normalizedText).to.be.defined;
-  });
   it('should return an array containing only alphabets', () => {
-    expect(InvertedIndex.normalizedText(sampleData)).to.not.include(' ');
-    expect(InvertedIndex.normalizedText(sampleData)).to.not.include('#$%^6');
+    expect(newIndex.normalizedText(sampleData)).to.not.include(' ');
+    expect(newIndex.normalizedText(sampleData)).to.not.include('#$%^6');
   });
   it('should return an array containing the correct number of words', () => {
-    expect(InvertedIndex.normalizedText(sampleData).length).to.equal(10);
+    expect(newIndex.normalizedText(sampleData).length).to.equal(10);
   });
 });
 describe('Unique words', () => {
-  it('should be a method in InvertedIndex', () => {
-    expect(InvertedIndex.uniqueWords).to.be.defined;
-  });
   it('should not return any duplicate words', () => {
-    expect(InvertedIndex.uniqueWords(sampleData).length).to.equal(5);
+    expect(newIndex.uniqueWords(sampleData).length).to.equal(5);
   });
 });
 describe('Read Book Data', () => {
-  it('createIndex should be a method in InvertedIndex', () => {
-    expect(InvertedIndex.createIndex).to.be.defined;
-  });
   it('should check that JSON file is not empty', () => {
     expect(newIndex.createIndex('emptyBooks.json', emptyBook))
     .to.eql('JSON file is Empty');
