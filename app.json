@@ -1,0 +1,16 @@
+{
+  "name": "Inverted-Index",
+  "description": "add app.json",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
