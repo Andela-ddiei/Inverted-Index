@@ -1,44 +1,126 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='en' ng-app="invertedIndexApp">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content='width=device-width, initial-scale=1, shrink-to-fit=no' />
-  <meta http-equiv="x-ua-compatible" content='ie=edge' />
-  <title>Inverted Index Application</title>
-  <!--<link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' />-->
-  <!--<link rel='stylesheet' href='css/font-awesome.min.css' type="text/css" />-->
-  <link rel='stylesheet' href='css/main.css' type='text/css' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link rel='stylesheet' href='css/main.css' type='text/css' />
+    <script src="https://use.fontawesome.com/7c2661d4b4.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+    <title>Inverted Index Application</title>
+
 </head>
-<body>
-    <div>
-        <div>
-        <header>
-            <div>
-            <h1>Inverted Index</h1>
+
+<body ng-controller="invertedController">
+
+    <header>
+
+        <nav class="navbar navbar-inverse bg-faded header">
+            <div class="row">
+                <div class="col-lg-4" id="title">
+                    <h3>Inverted Index App</h3>
+                </div>
+                <div class="col-lg-8 input-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	                    </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">--All--</a>
+                                <a class="dropdown-item" href="#">Books.json</a>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                </div>
             </div>
-                <div>
+        </nav>
+    </header>
+    <br />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div id="about">
+                    <h4>About this App</h4>
+                </div>
+                <div id="text">
+                    <p>Inverted index is a method which is designed to allow very fast full-text searches. It consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears.This predetermined
+                        lists help form an index which is queried when searching for a string of words in the documents.</p>
+                </div>
+                <hr>
+                <div id="usage">
+                    <h6>Usage</h6>
+                    Uploads
+                    <ul class="list-unstyled">
+                        <li>Upload JSON file</li>
+                        <li>Click Create index</li>
+                    </ul>
+                </div>
+                <div id="searchterms">
+                    <h6>Search</h6>
+                    <ul class="list-unstyled">
+                        <li>Enter search terms</li>
+                        <li>Click search</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="test">
                     <div>
-<input type="text" name="search" placeholder="Search..">
-<button>Search</button>
-</div>
-    <div>
-        <button>About</button>   
-         </div>
-         </div>
-        </header>
-            <main>
-<h1 id = "demo"> </h1>
+                        <button id="upload">
 
-                </main>
+                        <label class="btn btn-default btn-file">
+                      <i class="fa fa-upload" aria-hidden="true"></i>
+                      Upload File <input type="file" multiple accept=".json" hidden onchange="uploadFile()" id="upload-input" />
+                    </label>
+                    </button>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      --Select File--
+                    </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-primary left-space">Create Index</button>
+                </div>
+                <table class="table table-hover">
+                  <thead>
+              <tr>
+                <th> Keywords </th>
+                <th>Doc 1</th>
+                <th>Doc 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>a</td>
+                <td></td>
+              </tr>
+            </tbody>
+                </table>
             </div>
+        </div>
     </div>
-    <footer>
 
-    </footer>
-
-    </div>
-<script src='js/inverted-index.js' type="text/javascript"></script>
-
+    <script src="js/inverted-index.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </body>
 
 </html>
