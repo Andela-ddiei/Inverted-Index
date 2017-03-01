@@ -16,7 +16,6 @@ describe('Validate files', () => {
     expect(Array.isArray(emptyBook)).to.be.true;
     expect(typeof books[0]).to.equal('object');
   });
-
   it('should not be empty', () => {
     expect(books.length).to.not.equal(0);
     expect(emptyBook.length).to.equal(0);
@@ -36,11 +35,13 @@ describe('Normalized Text', () => {
     expect(newIndex.normalizedText(sampleData).length).to.equal(10);
   });
 });
+
 describe('Unique words', () => {
   it('should not return any duplicate words', () => {
     expect(newIndex.uniqueWords(sampleData).length).to.equal(5);
   });
 });
+
 describe('Read Book Data', () => {
   it('should check that JSON file is not empty', () => {
     expect(newIndex.createIndex('emptyBooks.json', emptyBook))
@@ -64,20 +65,18 @@ describe('Get index', () => {
     expect(newIndex.getIndex('books')).to.be.defined;
   });
 });
+
 describe('Search index', () => {
   it('should have search index method in the class', () => {
     expect(InvertedIndex.searchIndex).to.be.defined;
   });
   it('Should return the correct index for words searched for', () => {
     expect(newIndex.searchIndex('fellowship', 'books.json')).to.eql({
-      fellowship: [1, 2]
-    });
+      fellowship: [1, 2] });
     expect(newIndex.searchIndex('Alice', 'books.json')).to.eql({
-      alice: [0]
-    });
+    alice: [0] });
     expect(newIndex.searchIndex('A', 'books.json')).to.eql({
-      a: [0, 1, 2]
-    });
+    a: [0, 1, 2] });
   });
   it('should handle a varied number of search terms', () => {
     expect(newIndex.searchIndex('a alice alliance', 'books.json'))
