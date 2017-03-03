@@ -1,44 +1,122 @@
 <!DOCTYPE html>
 <html lang='en'>
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content='width=device-width, initial-scale=1, shrink-to-fit=no' />
-  <meta http-equiv="x-ua-compatible" content='ie=edge' />
-  <title>Inverted Index Application</title>
-  <!--<link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' />-->
-  <!--<link rel='stylesheet' href='css/font-awesome.min.css' type="text/css" />-->
-  <link rel='stylesheet' href='css/main.css' type='text/css' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link rel='stylesheet' href='css/main.css' type='text/css' />
+    <script src="https://use.fontawesome.com/7c2661d4b4.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+    <title>Inverted Index Application</title>
+
 </head>
+
 <body>
-    <div>
-        <div>
-        <header>
+     <header>
+         <nav class="navbar navbar-inverse bg-faded header">
+            <div class="row">
+                <div class="col-lg-4" id="title">
+                    <h3>Inverted Index App</h3>
+                </div>
+                <div class="col-lg-8 input-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          	                    </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">--All--</a>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    <button type="button" class="btn btn-info btn-lg about" data-toggle="modal" data-target="#myModal">About</button>
+                </div>
+            </div>
+
+            </nav>
+    </header>
+    <br />
+    <div class="alert alert-danger alert-dismissible" role="alert" id="alert-div" hidden>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             Invalid JSON File!
+    </div>
+    <div class="container-fluid main">
+        <div class ="upload-select-create">
             <div>
-            <h1>Inverted Index</h1>
+                <button id="upload">
+                    <label class="btn btn-default btn-file">
+                        <i class="fa fa-upload" aria-hidden="true"></i>
+                        Upload File <input type="file" multiple accept=".json" hidden onchange="uploadFile()" id="upload-input" />
+                    </label>
+                </button>
             </div>
-                <div>
-                    <div>
-<input type="text" name="search" placeholder="Search..">
-<button>Search</button>
+            &nbsp;&nbsp;&nbsp;
+            <div class="styled-select blue semi-square">
+                <select>
+                    <option selected>-- Select File --</option>
+                </select>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary left-space" id="left-space" onclick="someFunction()">Create Index</button>
+        </div>
+        <div id="tableDiv">
+                
+        </div>
+    </div>
+
+            <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title about-app">About this App</h4>
+      </div>
+      <div class="modal-body">
+        <div id="text">
+            <p>Inverted index is a method which is designed to allow very fast full-text searches. It consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears.This predetermined
+                lists help form an index which is queried when searching for a string of words in the documents.</p>
+        </div>
+         <hr>
+         <div id="usage">
+            <h6>Usage</h6>
+                Uploads
+                <ul class="list-unstyled">
+                    <li>Upload JSON file</li>
+                    <li>Click Create index</li>
+                </ul>
+        </div>
+        <div id="searchterms">
+            <h6>Search</h6>
+                <ul class="list-unstyled">
+                    <li>Enter search terms</li>
+                    <li>Click search</li>
+                </ul>
+         </div>  
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+     
+  </div>
 </div>
-    <div>
-        <button>About</button>   
-         </div>
-         </div>
-        </header>
-            <main>
-<h1 id = "demo"> </h1>
+</div>
 
-                </main>
-            </div>
-    </div>
-    <footer>
-
-    </footer>
-
-    </div>
-<script src='js/inverted-index.js' type="text/javascript"></script>
-
+    <script src="js/inverted-index.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </body>
 
 </html>
