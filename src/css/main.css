@@ -21,9 +21,28 @@ body {
 #search {
     float: right;
 }
+.about{
+    margin-left: 10px;
+    background-color: #228B22;
+    border: none;
+}
+.about:hover {
+    background-color: #006400 !important;
+}
 
 #select {
     float: right;
+}
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+.blue select    { 
+    color: #fff;
+    height: 40px;
+    background-color: #0275d8;; 
 }
 
 p {
@@ -88,11 +107,16 @@ vr {
     margin-top: 30px;
 }
 
-.test>div,
-.test>button {
+.upload-select-create>div,
+.upload-select-create>button {
     float: left;
 }
-
+.main{
+    margin-left: 30px;
+}
 .left-space {
     margin-left: 7px;
+}
+.about-app h4{
+    text-align: center !important;
 }
