@@ -5,6 +5,10 @@
   "authors": [
     "Delores Diei"
   ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "sweetalert": "^1.1.3"
+  },
   "license": "ISC",
   "homepage": "https://github.com/Andela-ddiei/Inverted-Index",
   "ignore": [
