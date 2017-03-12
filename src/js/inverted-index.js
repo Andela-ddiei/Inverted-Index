@@ -97,28 +97,22 @@ class InvertedIndex {
  * to document locations
  */
   searchIndex(query, indexToSearch) {
-    const multipleFileResults = [];
-    let singleSearchResult = {};
+    const searchResult = {};
     const searchTerms = this.uniqueWords(query);
     searchTerms.forEach((word) => {
       const errorMessage =
       ` We are Sorry but ${word} is not found in our database`;
       if (indexToSearch) {
-        this.indices[indexToSearch][word] ?
-        (singleSearchResult[word] = this.indices[indexToSearch][word]) :
-        (singleSearchResult[word] = errorMessage);
+        searchResult[word] = this.indices[indexToSearch][word] ?
+          this.indices[indexToSearch][word] : errorMessage;
       } else {
         Object.keys(this.indices).forEach((key) => {
-          this.indices[key][word] ?
-          (singleSearchResult[word] = this.indices[key][word]) :
-          (singleSearchResult[word] = errorMessage);
-          multipleFileResults.push(singleSearchResult);
-          singleSearchResult = {};
+          searchResult[word] = this.indices[key][word] ?
+          this.indices[key][word] : errorMessage;
         });
       }
     });
-    return (multipleFileResults.length === 0 ?
-    singleSearchResult : multipleFileResults);
+    return searchResult;
   }
 }
 module.exports = InvertedIndex;
