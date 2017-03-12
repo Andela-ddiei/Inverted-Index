@@ -1,8 +1,8 @@
 
 // angular
-const myApp = angular.module('InvertedIndexApp', ['oitozero.ngSweetAlert']);  
-myApp.controller('InvertedIndexController', 
-  ['$scope','SweetAlert', ($scope, SweetAlert) => {
+const myApp = angular.module('InvertedIndexApp', ['oitozero.ngSweetAlert']);
+myApp.controller('InvertedIndexController',
+  ['$scope', 'SweetAlert', ($scope, SweetAlert) => {
     const newIndex = new InvertedIndex();
     const uploadedFileNames = [];
     const uploadedFileContent = [];
@@ -46,7 +46,7 @@ myApp.controller('InvertedIndexController',
             $scope.uploadedFileNames = uploadedFileNames;
             $scope.$apply();
           }
-        } catch (e) {
+        } catch (error) {
           $scope.uploadSuccess = false;
         }
       };
@@ -67,7 +67,6 @@ myApp.controller('InvertedIndexController',
         $scope.indexExists = false;
         SweetAlert.swal('Error', 'Upload a valid JSON file first.', 'error');
       }
-      console.log(newIndex.indices);
     };
     $scope.searchFile = () => {
       $scope.indexToSearch = document.getElementById('search-dropdown').value;
@@ -81,7 +80,6 @@ myApp.controller('InvertedIndexController',
           $scope.searchResult = newIndex.searchAll($scope.searchTerms);
           $scope.validSearch = true;
         }
-        console.log($scope.searchResult);
       } else {
         $scope.validSearch = false;
       }

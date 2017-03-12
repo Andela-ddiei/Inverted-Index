@@ -109,6 +109,10 @@ class InvertedIndex {
     });
     return searchResult;
   }
+  /**
+   * @param{String} query - Words to search for
+   * @return{Object} searchResult - Maps searched words
+   */
   searchAll(query) {
     const searchResult = {};
     Object.keys(this.indices).forEach((fileName) => {
