@@ -7,7 +7,7 @@
     "test": "test/spec"
   },
   "scripts": {
-    "start": "node node_modules/gulp/bin/gulp",
+    "start": "node node_modules/gulp/bin/gulp start",
     "test": "mocha test/spec/inverted-index.spec.js",
     "lint": "node_modules/.bin/eslint src/js/ || true",
     "cover": "istanbul cover -x test/spec/test.js node_modules/mocha/bin/_mocha test/spec/inverted-index.spec.js",
@@ -42,6 +42,7 @@
     "bower": "^1.8.0",
     "dotenv": "^4.0.0",
     "express": "^4.14.1",
-    "gulp-bower": "0.0.13"
+    "gulp-bower": "0.0.13",
+    "gulp-nodemon": "^2.2.1"
   }
 }

@@ -4,10 +4,14 @@ require('dotenv').config();
 
 const app = express();
 
-app.get('*', (req, res) => {
+app.use(express.static(path.join(__dirname, '/src')));
+
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './src/index.html'));
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('app listening on 3000');
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`app listening on ${port}`);
 });
