@@ -41,7 +41,6 @@ myApp.controller('InvertedIndexController',
             SweetAlert.swal('Good Job', 'Upload success!', 'success');
             $scope.filed = filed;
             uploadedFileNames.push($scope.theFile.name);
-            console.log(uploadedFileNames);
             uploadedFileContent.push(filed);
             $scope.uploadedFileNames = uploadedFileNames;
             $scope.$apply();
