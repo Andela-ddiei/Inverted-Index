@@ -1,7 +1,6 @@
 const chai = require('chai');
 const InvertedIndex = require('../../src/js/inverted-index.js');
 const books = require('../books.json');
-const books2 = require('../books2.json');
 const emptyBook = require('../emptyBook.json');
 const invalidBook = require('../invalidBook.json');
 
@@ -62,9 +61,8 @@ describe('Unique words', () => {
 
 describe('Populate index', () => {
   newIndex.createIndex('books.json', books);
-  newIndex.createIndex('books2.json', books2);
   it('should create index once JSON file has been read', () => {
-    expect(Object.keys(newIndex.indices).length).to.equal(2);
+    expect(Object.keys(newIndex.indices).length).to.equal(1);
   });
 
   it('should map words to the correct document location', () => {
@@ -132,22 +130,3 @@ describe('Search index', () => {
       .to.eql({ a: [0, 1, 2], alice: [0], alliance: [1, 2] });
   });
 });
-describe('Search all uploaded files', () => {
-  it('should search through all uploaded files if no file is chosen', () => {
-    expect(newIndex.searchIndex('alice in pilgrim tri-state playlist')).to.eql(
-      [{ alice: [0] },
-      { alice: ' We are Sorry but alice is not found in our database' },
-      { in: [0, 1, 2] },
-      { in: [0, 1, 2] },
-      { pilgrim: ' We are Sorry but pilgrim is not found in our database' },
-      { pilgrim: [0] },
-      { tri: ' We are Sorry but tri is not found in our database' },
-      { tri: [1] },
-      { state: ' We are Sorry but state is not found in our database' },
-      { state: [1] },
-      { playlist: ' We are Sorry but playlist is not found in our database' },
-      { playlist: [2] }]
-    );
-  });
-});
-
