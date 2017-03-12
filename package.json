@@ -10,7 +10,7 @@
     "start": "node node_modules/gulp/bin/gulp",
     "test": "mocha test/spec/inverted-index.spec.js",
     "lint": "node_modules/.bin/eslint src/js/ || true",
-    "cover": "istanbul cover -x test/spec/test.js node_modules/mocha/bin/_mocha test/spec/test.js",
+    "cover": "istanbul cover -x test/spec/test.js node_modules/mocha/bin/_mocha test/spec/inverted-index.spec.js",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
@@ -39,7 +39,9 @@
     "mocha-lcov-reporter": "^1.2.0"
   },
   "dependencies": {
+    "bower": "^1.8.0",
     "dotenv": "^4.0.0",
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "gulp-bower": "0.0.13"
   }
 }
