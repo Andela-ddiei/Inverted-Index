@@ -7,8 +7,9 @@
     "test": "test/spec"
   },
   "scripts": {
-    "start": "bower install && node node_modules/gulp/bin/gulp start",
+    "start": "node server.js",
     "test": "mocha test/spec/inverted-index.spec.js",
+    "postinstall": "bower install"
     "lint": "node_modules/.bin/eslint src/js/ || true",
     "cover": "istanbul cover -x test/spec/test.js node_modules/mocha/bin/_mocha test/spec/inverted-index.spec.js",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
