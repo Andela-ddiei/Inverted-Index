@@ -26,7 +26,7 @@
 
 ## How users can get started with the project
 
-- By clicking on the (Production app)[https://ddiei-inverted-index-app.herokuapp.com/]
+- By clicking on the [Production app](https://ddiei-inverted-index-app.herokuapp.com/)
 
 ## Dependencies
 
