@@ -10,36 +10,33 @@ class InvertedIndex {
     this.documentCount = 0;
   }
 /**
- * normalizedText takes a string with numbers,
+ * normalizeText takes a string with numbers,
  * spaces and symbols and returns a normalized string
  * @param{String} text - The name of the string to be normalized
- * @return{String} normalized string
+ * @return{Array} Array of normalized text
  */
-  normalizedText(text) {
-    this.text = text;
-    return this.text.toLowerCase().match(/[A-Za-z]+/g,
-      matched => matched.sort());
+  static normalizeText(text) {
+    return (text.toLowerCase().match(/[A-Za-z]+/g).sort());
   }
 /**
  * @param{String} words - String to be filtered
  * @return{Array} token - Array without duplicate words
  */
-  uniqueWords(words) {
-    this.words = words;
-    const tokens = this.normalizedText(this.words);
+  static uniqueWords(words) {
+    const tokens = InvertedIndex.normalizeText(words);
     return tokens.filter((item, index) =>
                 tokens.indexOf(item) === index);
   }
   /**
-   * Validate File
+   * isValidFile checks the validity of uploaded files
    * @param {Object} file the selected file
-   * @returns {String} validation message
+   * @returns {Boolean} check - returns true for valid files
+   * and false for invalid files.
    */
-  isValidFile(file) {
-    this.file = file;
+  static isValidFile(file) {
     let check = true;
     try {
-      const jsonFile = JSON.parse(JSON.stringify(this.file));
+      const jsonFile = JSON.parse(JSON.stringify(file));
       if (jsonFile.length === 0) {
         check = false;
       }
@@ -62,7 +59,7 @@ class InvertedIndex {
   createIndex(fileName, fileContent) {
     const indexedFile = {};
     const wordsToIndex = [];
-    if (this.isValidFile(fileContent)) {
+    if (InvertedIndex.isValidFile(fileContent)) {
       fileContent.forEach((document) => {
         this.documentCount += 1;
         if (document.text) {
@@ -70,7 +67,7 @@ class InvertedIndex {
         }
       });
     }
-    const uniqueContent = this.uniqueWords(wordsToIndex.join(' '));
+    const uniqueContent = InvertedIndex.uniqueWords(wordsToIndex.join(' '));
     uniqueContent.forEach((word) => {
       indexedFile[word] = [];
       wordsToIndex.forEach((document, index) => {
@@ -98,7 +95,7 @@ class InvertedIndex {
  */
   searchIndex(query, indexToSearch) {
     const searchResult = {};
-    const searchTerms = this.uniqueWords(query);
+    const searchTerms = InvertedIndex.uniqueWords(query);
     searchTerms.forEach((word) => {
       const errorMessage =
       ` We are Sorry but ${word} is not found in our database`;
@@ -106,11 +103,19 @@ class InvertedIndex {
         searchResult[word] = this.indices[indexToSearch][word] ?
           this.indices[indexToSearch][word] : errorMessage;
       } else {
-        Object.keys(this.indices).forEach((key) => {
-          searchResult[word] = this.indices[key][word] ?
-          this.indices[key][word] : errorMessage;
-        });
+        return 'Choose a filename';
       }
+    });
+    return searchResult;
+  }
+  /**
+   * @param{String} query - Words to search for
+   * @return{Object} searchResult - Maps searched words
+   */
+  searchAll(query) {
+    const searchResult = {};
+    Object.keys(this.indices).forEach((fileName) => {
+      searchResult[fileName] = this.searchIndex(query, fileName);
     });
     return searchResult;
   }

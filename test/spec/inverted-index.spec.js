@@ -1,6 +1,7 @@
 const chai = require('chai');
 const InvertedIndex = require('../../src/js/inverted-index.js');
 const books = require('../books.json');
+const books2 = require('../books2.json');
 const emptyBook = require('../emptyBook.json');
 const invalidBook = require('../invalidBook.json');
 
@@ -11,12 +12,12 @@ const sampleData = ' Mary had a    little #$%^6 lamb, a little lamb Mary had';
 
 describe('Validate files', () => {
   it('should check that uploaded file is valid JSON', () => {
-    expect(newIndex.isValidFile(books)).to.be.true;
-    expect(newIndex.isValidFile(emptyBook)).to.be.false;
-    expect(newIndex.isValidFile(invalidBook)).to.be.false;
+    expect(InvertedIndex.isValidFile(books)).to.be.true;
+    expect(InvertedIndex.isValidFile(emptyBook)).to.be.false;
+    expect(InvertedIndex.isValidFile(invalidBook)).to.be.false;
   });
 
-  it('should not be empty', () => {
+  it('should check that uploaded file is not empty', () => {
     expect(books.length).to.not.equal(0);
     expect(emptyBook.length).to.equal(0);
   });
@@ -27,42 +28,43 @@ describe('Validate files', () => {
   });
 });
 
-describe('Normalized Text', () => {
+describe('Normalize Text', () => {
   it('should return an array containing only alphabets', () => {
-    expect(newIndex.normalizedText(sampleData)).to.not.include(' ');
-    expect(newIndex.normalizedText(sampleData)).to.match(/^[a-zA-Z]/);
+    expect(InvertedIndex.normalizeText(sampleData)).to.not.include(' ');
+    expect(InvertedIndex.normalizeText(sampleData)).to.match(/^[a-zA-Z]/);
   });
 
   it('should return an array containing the correct number of words', () => {
-    expect(newIndex.normalizedText(sampleData).length).to.equal(10);
+    expect(InvertedIndex.normalizeText(sampleData).length).to.equal(10);
   });
 
   it('should return an array containing the correct words', () => {
-    expect(newIndex.normalizedText(sampleData)).to.eql(['mary',
+    expect(InvertedIndex.normalizeText(sampleData)).to.eql(['a',
+      'a',
       'had',
-      'a',
-      'little',
+      'had',
       'lamb',
-      'a',
-      'little',
       'lamb',
+      'little',
+      'little',
       'mary',
-      'had']);
+      'mary']);
   });
 });
 
 describe('Unique words', () => {
   it('should not return any duplicate words', () => {
-    expect(newIndex.uniqueWords(sampleData).length).to.equal(5);
-    expect(newIndex.uniqueWords(sampleData))
-      .to.eql(['mary', 'had', 'a', 'little', 'lamb']);
+    expect(InvertedIndex.uniqueWords(sampleData).length).to.equal(5);
+    expect(InvertedIndex.uniqueWords(sampleData))
+      .to.eql(['a', 'had', 'lamb', 'little', 'mary']);
   });
 });
 
 describe('Populate index', () => {
   newIndex.createIndex('books.json', books);
+  newIndex.createIndex('books2.json', books2);
   it('should create index once JSON file has been read', () => {
-    expect(Object.keys(newIndex.indices).length).to.equal(1);
+    expect(Object.keys(newIndex.indices).length).to.equal(2);
   });
 
   it('should map words to the correct document location', () => {
@@ -128,5 +130,22 @@ describe('Search index', () => {
   it('should handle a varied number of search terms', () => {
     expect(newIndex.searchIndex('a alice alliance', 'books.json'))
       .to.eql({ a: [0, 1, 2], alice: [0], alliance: [1, 2] });
+  });
+});
+describe('searchAll', () => {
+  it('should search through all uploaded files', () => {
+    expect(newIndex.searchAll('A alice hobbit scott fox'))
+      .to.eql({ 'books.json':
+      { a: [0, 1, 2],
+        alice: [0],
+        fox: ' We are Sorry but fox is not found in our database',
+        hobbit: [1, 2],
+        scott: ' We are Sorry but scott is not found in our database' },
+        'books2.json':
+        { a: [0, 1, 2],
+          alice: ' We are Sorry but alice is not found in our database',
+          fox: [1],
+          hobbit: ' We are Sorry but hobbit is not found in our database',
+          scott: [0] } });
   });
 });

@@ -1,106 +1,89 @@
-const fileNames = {};
-let currentSelection = '';
-const newIndex = new InvertedIndex();
+// angular
+const myApp = angular.module('InvertedIndexApp', ['oitozero.ngSweetAlert']);
+myApp.controller('InvertedIndexController',
+  ['$scope', 'SweetAlert', ($scope, SweetAlert) => {
+    const newIndex = new InvertedIndex();
+    const uploadedFileNames = [];
+    const uploadedFileContent = [];
+    $scope.uploadFile = () => {
+      $scope.validSearch = false;
+      $scope.indexExists = false;
+      Object.keys(document.getElementById('upload-input').files)
+        .forEach((file) => {
+          const theFile = document.getElementById('upload-input').files[file];
+          if (!theFile) {
+            SweetAlert
+            .swal('Error', 'Please Select a file to Upload!', 'error');
+            return;
+          }
+          const reader = new FileReader();
+          reader.readAsText(theFile);
 
-/**
- * @param{String} fileName - The name of the uploadaed file
- * @param{Array} obj - The array of indices mapped to the file name
- */
-function updateFileNames(fileName, obj) {
-  fileNames[fileName] = obj;
-  populateDropDown();
-}
-/**
- * The upload file function takes the file uploaded,
- * reads it as text and returns a json file.
- */
-function uploadFile() {
-  const files = document.getElementById('upload-input').files[0];
-  if (files.type !== 'application/json'){
-    const alert = document.getElementById('alert-div');
-    alert.removeAttribute('hidden');
-  } else {
-    const readMyFileAss = new FileReader();
-    readMyFileAss.readAsText(files);
-    readMyFileAss.onload = (() => (event) => {
-        updateFileNames(files.name, JSON.parse(event.target.result));
-        console.log(JSON.parse(event.target.result));
-      })(files);
-  }
-  
-}
-
-function populateDropDown() {
-  const dropDown = document.getElementsByTagName('select')[0];
-  const fileKeys = Object.keys(fileNames);
-  fileKeys.forEach(el => {
-    const option = document.createElement('option');
-    option.innerHTML = el;
-    dropDown.appendChild(option);
-  });
-}
-
-let fName  = document.getElementsByTagName("select")[0];
-fName.onchange = function(e) {
-    currentSelection = e.target.value;
-  }
-function someFunction(){
-    newIndex.createIndex(currentSelection, fileNames[currentSelection]);
-    const indexValues = newIndex.getIndex(currentSelection);
-  }
-    
-
-    // create a table and populate
-    const table = document.createElement('table');
-    table.classList.add("table", "table-hover");
-
-
-    for (let token in indexValues) {
-      
-      let cellArray = [];
-
-      for (let i = 0; i < newIndex.documentCount; i++) {
-        cellArray.push(document.createElement('td'));
-      }
-
-      let row  = document.createElement('tr');
-
-      let tokenCell = document.createElement('td');
-      tokenCell.innerHTML = token;
-      row.appendChild(tokenCell);
-
-      cellArray = cellArray.map((cell, i) => {
-        if (indexValues[token].includes(i)) {
-          cell.innerHTML = 'x';
-          return cell;
-        } else {
-          cell.innerHTML = 'o';
-          return cell;
+          reader.onload = (e) => {
+            if (theFile.type !== 'application/json') {
+              $scope.uploadSuccess = false;
+              SweetAlert.swal('Error', 'This is not a JSON file.', 'error');
+              return;
+            }
+            try {
+              const filed = JSON.parse(e.target.result);
+              if (uploadedFileNames.includes(theFile.name)) {
+                SweetAlert
+                .swal('Error', 'This file has already been uploaded', 'error');
+                $scope.$apply();
+                return;
+              }
+              if (filed.length === 0 || !filed[0].title || !filed[0].text) {
+                $scope.uploadSuccess = false;
+            // setMessage('This is an Empty JSON File');
+                SweetAlert.swal('Error', 'This is an Empty JSON File', 'error');
+                $scope.$apply();
+              } else {
+                $scope.uploadSuccess = true;
+                SweetAlert.swal('Good Job', 'Upload success!', 'success');
+                $scope.filed = filed;
+                uploadedFileNames.push(theFile.name);
+                uploadedFileContent.push(filed);
+                $scope.uploadedFileNames = uploadedFileNames;
+                $scope.$apply();
+              }
+            } catch (error) {
+              $scope.uploadSuccess = false;
+            }
+          };
+        });
+    };
+    $scope.createIndex = () => {
+      const fileName = document.getElementById('createIndexSelect').value;
+      const indexToCreate = uploadedFileNames.indexOf(fileName);
+      if ($scope.uploadSuccess) {
+        newIndex.createIndex(fileName, uploadedFileContent[indexToCreate]);
+        $scope.range = [];
+        const filedLength = $scope.filed.length;
+        for (let docIndex = 0; docIndex < filedLength; docIndex += 1) {
+          $scope.range.push(docIndex);
         }
-      });
-
-      console.log(cellArray);
-
-      cellArray.forEach(cell => {
-        row.appendChild(cell);
-      })
-
-      // for (let value of indexValues[token]) {
-      //   let cell = document.createElement('td');
-      //   cell.innerHTML = value;
-      //   row.appendChild(cell);
-      // }
-      table.appendChild(row);
-      const tableDiv = document.getElementById('tableDiv');
-      tableDiv.appendChild(table);
-    }
-    
-    document.getElementsByTagName('body')[0].appendChild(table);
-    console.log('table should have been created')
-
-  }
-  
-
-
-
-
+        $scope.indexExists = true;
+        $scope.indexObject = newIndex.getIndex(fileName);
+      } else {
+        $scope.indexExists = false;
+        SweetAlert.swal('Error', 'Upload a valid JSON file first.', 'error');
+      }
+    };
+    $scope.searchFile = () => {
+      $scope.indexToSearch = document.getElementById('search-dropdown').value;
+      $scope.searchResult = [];
+      if ($scope.indexExists) {
+        if ($scope.indexToSearch !== '-- All --') {
+          $scope.searchResult = newIndex
+          .searchIndex($scope.searchTerms, $scope.indexToSearch);
+          $scope.validSearch = true;
+        } else {
+          $scope.searchResult = newIndex.searchAll($scope.searchTerms);
+          $scope.validSearch = true;
+        }
+      } else {
+        $scope.validSearch = false;
+      }
+    };
+  }]);
