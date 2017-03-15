@@ -73,7 +73,7 @@
 
      > npm start
 
-- This launches the app on your default browser on http://localhost:3030
+- This launches the app on your default browser on http://localhost:4000
 
 ## How to run tests
 
