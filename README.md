@@ -25,26 +25,60 @@
 - It is the most popular data structure used in document retrieval systems.
 
 ## How users can get started with the project
-N/A
 
-## Requirements
+- By clicking on the (Production app)[https://ddiei-inverted-index-app.herokuapp.com/]
 
-- [Bootstrap](http://getbootstrap.com/) makes styling responsive web pages faster and easier. 
-   
-- [AngularJs](https://angularjs.org/) is a JavaScript MVC Framework that integrates two-way data binding, web services, and build web components. 
-   
-- [JQuery](https://jquery.com/) is a very helpful JavaScript framework. It has features that out with HTML document manipulation, event handling, animation, and a host of other things. 
-    
-- [Gulp](https://gulpjs.com) is a handy toolkit for automating painful or time-consuming tasks in your development workflow. 
-- [mocha](https://mochajs.org) is a feature-rich JavaScript test framework running on Node.js and in the browser used for asynchronous testing.
+## Dependencies
 
-## How to setup the project/installation/configuration
+- [Node js](https://nodejs.org/en/) is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [Bootstrap](http://getbootstrap.com/) makes styling responsive web pages faster and easier.
+- [Gulp](https://gulpjs.com)is a handy toolkit for automating painful or time-consuming tasks in your development workflow.
+- [Mocha](https://mochajs.org/)is a feature-rich JavaScript test framework running on Node.js and in the browser used for asynchronous testing.
+- [Chai](http://chaijs.com/) is a BDD / TDD assertion library for node and the browser that can be paired with any javascript testing framework.
+- [Istanbul](https://istanbul.js.org/) instruments your ES5 and ES2015+ JavaScript code with line counters, so that you can track how well your unit-tests exercise your codebase.
+- [Eslint](http://eslint.org/) provides a pluggable linting utility for JavaScript.
+- [Hound CI](https://houndci.com/) comments on style violations in GitHub pull requests.
+- [Travis CI](https://travis-ci.org/) a hosted continuous integration and delivery service for GitHub projects.
+- [Express js](http://expressjs.com/) handles backend routing.
+- [BrowerSync](https://browsersync.io/) allows synchronized browser testing.
+- [Nodemon](https://nodemon.io/)monitors any changes in your source and restarts the browser.
+- [Coveralls](https://coveralls.io/) shows the parts of your code that are not covered by your test suite.
 
-N/A
+
+## Installation and Setup
+
+- Navigate to directory of choice on terminal.
+- Clone this repository on that directory.
+
+   - Using SSH;
+
+     > git clone git@github.com:Andela-ddiei/inverted-index.git
+   - Using HTTP;
+
+     > https://github.com/Andela-ddiei/inverted-index.git
+- Navigate  to the repo's folder on your computer.
+
+     > cd inverted-index/
+
+- Ensure you have [Node.js](https://nodejs.org/en/) installed.
+- Install the app's dependencies using npm.
+ 
+     > npm install
+
+- Run tests in your terminal.
+
+     > npm test
+
+- Start the application.
+
+     > npm start
+
+- This launches the app on your default browser on http://localhost:3030
 
 ## How to run tests
 
-N/A
+- In your terminal, run 
+   > npm test
 
 ## Limitations of the project
 
