@@ -91,7 +91,3 @@
 
 [https://github.com/andela-ddiei/inverted-index/issues](https://github.com/andela-ddiei/inverted-index/issues)
 
-## Licence
-
-- MIT
-
